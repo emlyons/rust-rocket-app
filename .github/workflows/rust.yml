@@ -11,25 +11,13 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
-
-
-  Dockerize:
     
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:$(date +%s)
+      run: docker build . --file Dockerfile --tag emlyons/rust-rocket-app:latest
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
@@ -37,4 +25,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: push to docker hub
       run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:$(date +%s)	
+        docker push emlyons/rust-rocket-app:latest	
