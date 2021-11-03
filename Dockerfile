@@ -1,7 +1,7 @@
 FROM rust:1 as builder
 WORKDIR /app
 COPY . .
-RUN cargo install --path
+RUN cargo install --path .
 RUN cargo test
 
 FROM debian:buster-slim as runner
