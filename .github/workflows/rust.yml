@@ -23,4 +23,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build and push to Docker Hub
       run: |
-        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:latest --push .
+        docker buildx build --platform linux/arm/v7 -t ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:armv7 --push .
