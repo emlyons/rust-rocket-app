@@ -1,9 +1,8 @@
 FROM rust:1 as builder
 WORKDIR /app
 COPY . .
-RUN cargo update
-RUN cargo build --release
-RUN cargo test --release
+RUN cargo install --path
+RUN cargo test
 
 FROM debian:buster-slim as runner
 COPY --from=builder /usr/local/cargo/bin/rust-rocket-app /usr/local/bin/rust-rocket-app
