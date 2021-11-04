@@ -6,8 +6,7 @@ RUN apt-get -y install binutils-arm-linux-gnueabihf
 RUN apt-get -y install gcc-arm-linux-gnueabihf
 WORKDIR /app
 COPY . .
-RUN cargo install --path .
-RUN cargo test
+RUN cargo install --target=armv7-unknown-linux-gnueabihf --path .
 
 FROM debian:buster-slim as runner
 COPY --from=builder /usr/local/cargo/bin/rust-rocket-app /usr/local/bin/rust-rocket-app
