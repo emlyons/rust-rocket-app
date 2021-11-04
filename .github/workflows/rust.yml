@@ -21,6 +21,9 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push to Docker Hub
+    - name: Build the Docker image
+      run: docker build . -t rust-rocket-app
+    - name: push to docker hub
       run: |
-        docker buildx build --platform linux/arm/v7 -t ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:armv7 --push .
+        docker tag rust-rocket-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:latest
