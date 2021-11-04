@@ -1,12 +1,7 @@
 FROM rust:1.52.1 AS rust
-RUN rustup install nightly
-RUN rustup target add armv7-unknown-linux-gnueabihf
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get -y install binutils-arm-linux-gnueabihf
-RUN apt-get -y install gcc-arm-linux-gnueabihf
 WORKDIR /app
 COPY . .
-RUN cargo build --target=armv7-unknown-linux-gnueabihf
+RUN cargo build
 
 FROM debian:buster-slim as runner
 COPY --from=builder /usr/local/cargo/bin/rust-rocket-app /usr/local/bin/rust-rocket-app
