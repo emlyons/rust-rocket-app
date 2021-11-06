@@ -11,14 +11,14 @@ env:
 
 jobs:
 
-    test:
-
+  Tests:
     runs-on: ubuntu-latest
     - uses: actions/checkout@v2
     - name: run tests
       run: cargo test
 
-    build:
+
+  Build:
   
     runs-on: ubuntu-latest
 
