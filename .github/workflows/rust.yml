@@ -21,6 +21,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Cargo build
+      run: cargo build --release
+    - name: Cargo test
+      run: cargo test
     - name: Build the Docker image
       run: docker build . -t rust-rocket-app
     - name: push to docker hub
