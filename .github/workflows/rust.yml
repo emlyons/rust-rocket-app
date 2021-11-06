@@ -34,7 +34,7 @@ jobs:
       run: cargo build --release
     - name: Build the Docker image
       run: |
-	docker buildx --platform linux/arm/v7 -t rust-rocket-app:latest .
+        docker buildx --platform linux/arm/v7 -t rust-rocket-app:latest .
     - name: push to docker hub
       run: |
         docker tag rust-rocket-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:latest
