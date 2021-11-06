@@ -11,7 +11,7 @@ env:
 
 jobs:
 
-  test:
+    test:
 
     runs-on: ubuntu-latest
     - uses: actions/checkout@v2
