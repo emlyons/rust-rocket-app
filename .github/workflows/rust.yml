@@ -10,7 +10,15 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+
+  test:
+
+    runs-on: ubuntu-latest
+    - uses: actions/checkout@v2
+    - name: run tests
+      run: cargo test
+
+    build:
   
     runs-on: ubuntu-latest
 
@@ -21,12 +29,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Cargo build
+    - name: build release
       run: cargo build --release
-    - name: Cargo test
-      run: cargo test
     - name: Build the Docker image
-      run: docker build . -t rust-rocket-app
+      run: |
+	docker buildx --platform linux/arm/v7 -t rust-rocket-app:latest .
     - name: push to docker hub
       run: |
         docker tag rust-rocket-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/rust-rocket-app:latest
