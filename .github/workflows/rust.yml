@@ -26,8 +26,7 @@ jobs:
       run: rustup default nightly
     - name: add armv7 target to rust
       run: rustup target add armv7-unknown-linux-gnueabihf
-    - name: install compiler
-      run: apt-get install gcc-arm-linux-gnueabi -y
+    - uses: numworks/setup-arm-toolchain@2020-q2
     - name: build release
       run: cargo build --target=armv7-unknown-linux-gnueabihf --release
     - name: Build the Docker image
