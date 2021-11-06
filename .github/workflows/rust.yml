@@ -27,7 +27,7 @@ jobs:
     - name: add armv7 target to rust
       run: rustup target add armv7-unknown-linux-gnueabihf
     - name: install compiler
-      run: apt-get install gcc-arm-linux-gnueabihf -y
+      run: apt-get install gcc-arm-linux-gnueabi -y
     - name: build release
       run: cargo build --target=armv7-unknown-linux-gnueabihf --release
     - name: Build the Docker image
