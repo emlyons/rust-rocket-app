@@ -23,9 +23,10 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: configure build environment
-      run: rustup default nightly
-      run: rustup target add armv7-unknown-linux-gnueabihf
-      run: apt install gcc-arm-linux-gnueabihf -y
+      run: |
+        rustup default nightly
+        rustup target add armv7-unknown-linux-gnueabihf
+        apt install gcc-arm-linux-gnueabihf -y
     - name: build release
       run: cargo build --target=armv7-unknown-linux-gnueabihf --release
     - name: Build the Docker image
